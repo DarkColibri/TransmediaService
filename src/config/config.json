@@ -1,0 +1,44 @@
+{
+  "development": {
+    "username": "root",
+    "password": "ortega",
+    "database": "transmedia_schema",
+    "host": "127.0.0.1",
+    "dialect": "mysql",
+    "timezone": "Europe/Madrid",
+    "operatorsAliases": false,
+    "pool": {
+      "max": 5,
+      "min": 0,
+      "idle": 20000,
+      "acquire": 40000,
+      "evict": 20000
+    }
+  },
+  "test": {
+    "username": "root",
+    "password": "password",
+    "database": "api_node_demo",
+    "host": "10.250.1.142",
+    "dialect": "mysql",
+    "timezone": "Europe/Madrid",
+    "operatorsAliases": false,
+    "saas_mayorista": "hefame",
+    "saas_nfs_path": "/var/aws_efs_app",
+    "logging": true,
+    "apigateway":"tasks.apigateway:8080"
+  },
+  "production": {
+    "username": "novartis",
+    "password": "password",
+    "database": "nov_pro_db",
+    "host": "mysql_db",
+    "dialect": "mysql",
+    "timezone": "Europe/Madrid",
+    "operatorsAliases": false,
+    "saas_mayorista": "hefame",
+    "saas_nfs_path": "/var/aws_efs_app",
+    "logging": false,
+    "apigateway":"tasks.apigateway:8080"
+  }
+}
