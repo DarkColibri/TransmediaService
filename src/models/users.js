@@ -1,30 +1,34 @@
-const debug = require('debug')('web:models:tasks')
+const debug = require('debug')('web:models:users')
 const moment = require("moment");
 
 module.exports = (sequelize, DataTypes) => {
   debug(moment().format('MMMM Do YYYY, h:mm:ss a'));
-  const Task = sequelize.define('tasks', {
+  const Users = sequelize.define('users', {
     id: {
       type: DataTypes.INTEGER,
       primaryKey: true,
       autoIncrement: true
     },
-    title: {
+    name: {
       type: DataTypes.STRING,
       defaultValue: "",
       allowNull: false
     },
-    description: {
+    email: {
+      type: DataTypes.STRING,
+      defaultValue: "",
+      allowNull: false
+    },
+    pasword: {
       type: DataTypes.STRING,
       defaultValue: "",
       allowNull: false
     }
   }
-  // , {
-  //   freezeTableName: true,
+  // ,{
+  //   freezeTableName: false,
   // }
   );
 
-
-  return Task;
+  return Users;
 }

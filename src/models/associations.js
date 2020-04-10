@@ -1,34 +1,31 @@
-const debug = require('debug')('web:models:tasks')
-const moment = require("moment");
+const debug = require("debug")("web:models:association");
+const moment = require('moment')
 
 module.exports = (sequelize, DataTypes) => {
   debug(moment().format('MMMM Do YYYY, h:mm:ss a'));
-  const Tasks = sequelize.define('tasks', {
+  const Associations = sequelize.define('associations', {
     id: {
       type: DataTypes.INTEGER,
       primaryKey: true,
       autoIncrement: true
     },
-    title: {
+    name: {
       type: DataTypes.STRING,
-      defaultValue: "",
       allowNull: false
     },
     description: {
       type: DataTypes.STRING,
-      defaultValue: "",
+      allowNull: false
+    },
+    link: {
+      type: DataTypes.STRING,
       allowNull: false
     }
   }
   // , {
-  //   freezeTableName: true,
+  //   freezeTableName: false,
   // }
   );
 
-  // relations
-  // Cron.associate = (models) => {
-  //   Cron.belongsTo(models.author);
-  // };
-
-  return Tasks;
+  return Associations;
 }

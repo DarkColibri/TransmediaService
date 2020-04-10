@@ -13,14 +13,18 @@
 				<div class="col-md-5">
 					<div class="card">
 						<div class="card-body">
-							<form @submit.prevent="sendTask">
+							<form @submit.prevent="sendAssociation">
 								<div class="form-group">
-									<!-- Tarea -->
-									<input v-model="task.title" type="text" placeholder="Insertar Tarea" class="form-control">
+									<!-- Name -->
+									<input v-model="association.name" type="text" placeholder="Insertar Nombre" class="form-control">
+								</div>
+                <div class="form-group">
+									<!--  -->
+									<input v-model="association.link" type="text" placeholder="Insertar Link" class="form-control">
 								</div>
 								<div class="form-group">
-									<!-- Descripcion -->
-									<textarea v-model="task.description" name="" id="" cols="30" rows="10" class="form-control" placeholder="Inserta una descripción"></textarea>
+									<!--  -->
+									<textarea v-model="association.description" name="" id="" cols="30" rows="10" class="form-control" placeholder="Inserta una descripción"></textarea>
 								</div>
 								<template v-if="edit === false">
 									<button class="btn btn-primary btn-block">Send</button>
@@ -37,17 +41,19 @@
 					<table class="table table-bordered">
 						<thead>
 							<tr>
-								<th>Task</th>
-								<th>Description</th>
+								<th>Asociación</th>
+                <th>Link</th>
+								<th>Descripción</th>
 							</tr>
 						</thead>
 						<tbody>
-							<tr v-for="task of tasks">
-								<td>{{task.title}}</td>
-								<td>{{task.description}}</td>
+							<tr v-for="association of associations">
+								<td>{{association.name}}</td>
+								<td>{{association.link}}</td>
+                <td>{{association.description}}</td>
 								<td>
-									<button @click="deleteTask(task.id)" class="btn btn-danger">Delete</button>
-									<button @click="editTask(task.id)" class="btn btn-secondary">Edit</button>
+									<button @click="deleteAssociation(association.id)" class="btn btn-danger">Delete</button>
+									<button @click="editAssociation(association.id)" class="btn btn-secondary">Edit</button>
 								</td>
 							</tr>
 						</tbody>
@@ -59,34 +65,35 @@
 </template>
 
 <script>
-	class Task {
-		constructor(title = '', description = '') {
-			this.title = title;
+	class Association {
+		constructor(name = '', link = '', description = '') {
+      this.name = name;
+      this.link = link;
 			this.description = description;
 		}
 	}
 export default {
-	// Datos de la máquina
+
 	data() {
 		return {
-			task: new Task(),
-			tasks: [],
+			association: new Association(),
+			associations: [],
       edit: false,
-      taskToEdit: ''
+      associationToEdit: ''
 		}	
 	},
 	created() {
-		this.getTasks();
+		this.getAssociations();
 	},
 	methods: {
     // Botón del Formulario
     // Envía los datos a la API del servidor
-		sendTask() {
+		sendAssociation() {
       if(this.edit === false){
         // POST http://localhost:8080/api/tasks/
-        fetch('/api/tasks/', { 
+        fetch('/api/associations/', { 
           method: 'POST',
-          body: JSON.stringify(this.task),
+          body: JSON.stringify(this.association),
           headers: {
             'Accept': 'application/json',
             'Content-type': 'application/json'
@@ -94,14 +101,14 @@ export default {
         })
         .then(res => res.json())  // Convierte respuesta a un objeto JSON
         .then(data => {           // Obtenemos el objeto JSON 
-          this.getTasks();
-			    this.task = new Task(); // Reinicia datos formulario
+          this.getAssociations();
+			    this.association = new Association(); // Reinicia datos formulario
         })
       } else {
         // PUT http://localhost:8080/api/tasks/
-        fetch('/api/tasks/' + this.taskToEdit, {
+        fetch('/api/associations/' + this.associationToEdit, {
           method: 'PUT',
-          body: JSON.stringify(this.task),
+          body: JSON.stringify(this.association),
           headers: {
             'Accept': 'application/json',
             'Content-type': 'application/json'
@@ -109,25 +116,25 @@ export default {
         })
         .then(res => res.json())	// Convierte respuesta a un objeto JSON
         .then(data => { 					// Obtenemos el objeto JSON 
-          this.getTasks();
+          this.getAssociations();
           // Reinicia datos formulario
-			    this.task = new Task();
+			    this.association = new Association();
         })	
       }
       this.edit = false;
-      this.taskToEdit = '';
+      this.associationToEdit = '';
 		},
 		// GET http://localhost:8080/api/tasks/
-		getTasks() {
-      fetch('/api/tasks/')
+		getAssociations() {
+      fetch('/api/associations/')
 			.then(res => res.json())
 			.then(data => {
-        this.tasks = data
-      } )
+        this.associations = data
+      })
     },
     // DELETE http://localhost:8080/api/tasks/
-		deleteTask(id){	
-			fetch('/api/tasks/' + id, {
+		deleteAssociation(id){	
+			fetch('/api/associations/' + id, {
 				method: 'DELETE',
 				headers: {
 					'Accept': 'application/json',
@@ -136,21 +143,18 @@ export default {
 			})
 			.then(res => res.json())
 			.then(data => {
-				this.getTasks();
+				this.getAssociations();
 			})
 		},
-		editTask(id) {
-      console.log(id)
+		editAssociation(id) {
 			// Envía los datos a la API del servidor POST http://localhost:8080/api/tasks/:id
-			fetch('/api/tasks/' + id )
+			fetch('/api/associations/' + id )
 			.then(res => res.json())
 			.then(data => {
-        this.task = new Task(data.title, data.description);
-        this.taskToEdit = id;
+        this.association = new Association(data.name, data.link, data.description);
+        this.associationToEdit = id;
 				this.edit = true;
 			})
-
-
 			// // Reinicia datos formulario
 			// this.task = new Task();
 		}

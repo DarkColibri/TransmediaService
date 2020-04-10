@@ -50,10 +50,7 @@ debug('CARGAMOS VUE (/public)');
 // Static files
 app.use(express.static(__dirname + '/public'));
 
-// app.listen(app.get ('port'), () => {
-//   console.log('App listening on port', app.get('port'));
-// });
-
+// -----------------------------------------------------------------------------------------------------
 console.log("if Sync Force true - Database will be reset")
 db.sequelize.sync({
   force: false

@@ -12,7 +12,6 @@ const config = require('../config/config.json')[env];
 
 const db = {};
 
-// const url = 'mysql://root:ortega@127.0.0.1:3306/transmedia_schema';
 // const sequelize = new Sequelize(url); 
 const sequelize = new Sequelize(config.database, config.username, config.password, config);
 // if (config.use_env_variable) {
@@ -21,8 +20,7 @@ const sequelize = new Sequelize(config.database, config.username, config.passwor
 //   const sequelize = new Sequelize(config.database, config.username, config.password, config);
 // }
 
-fs
-  .readdirSync(__dirname)
+fs.readdirSync(__dirname)
   .filter(file => {
     return (file.indexOf('.') !== 0) && (file !== basename) && (file.slice(-3) === '.js');
   })
