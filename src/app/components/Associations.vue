@@ -16,15 +16,15 @@
 							<form @submit.prevent="sendAssociation">
 								<div class="form-group">
 									<!-- Name -->
-									<input v-model="association.name" type="text" placeholder="Insertar Nombre" class="form-control">
+									<input v-model="association.name" @keyup.enter="sendAssociation" type="text" placeholder="Insertar Nombre" class="form-control">
 								</div>
                 <div class="form-group">
 									<!--  -->
-									<input v-model="association.link" type="text" placeholder="Insertar Link" class="form-control">
+									<input v-model="association.link" @keyup.enter="sendAssociation" type="text" placeholder="Insertar Link" class="form-control">
 								</div>
 								<div class="form-group">
 									<!--  -->
-									<textarea v-model="association.description" name="" id="" cols="30" rows="10" class="form-control" placeholder="Inserta una descripción"></textarea>
+									<textarea v-model="association.description" @keyup.enter="sendAssociation" name="" id="" cols="30" rows="10" class="form-control" placeholder="Inserta una descripción"></textarea>
 								</div>
 								<template v-if="edit === false">
 									<button class="btn btn-primary btn-block">Send</button>
@@ -47,7 +47,7 @@
 							</tr>
 						</thead>
 						<tbody>
-							<tr v-for="association of associations">
+							<tr v-for = "association of associations">
 								<td>{{association.name}}</td>
 								<td>{{association.link}}</td>
                 <td>{{association.description}}</td>

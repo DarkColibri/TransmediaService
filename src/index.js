@@ -10,9 +10,9 @@ const listEndpoints = require('express-list-endpoints');
 const db = require("./models");
 // APIs 
 debug('CARGAMOS TASKS');
-const apiTasks = require('./routes/tasks');
+const apiTasks = require('./api/tasks');
 debug('CARGAMOS ASSOCIATIONS');
-const apiAssociations = require('./routes/associations');
+const apiAssociations = require('./api/associations');
 debug('TODO CARGADO');
 const bodyParser = require("body-parser");
 
