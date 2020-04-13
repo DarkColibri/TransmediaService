@@ -1,5 +1,23 @@
 <template>
   <div class="container mt-5">
+    <hr>
+  <!-- Store -->
+    <h3>Test.vue : Número de Vuex (variable global) : {{$store.state.numeroVuex}} </h3>
+    <button @click="$store.commit('aumentar')">+</button>
+  <!-- Store con mapState y mapMutations --> 
+    <h3>Test.vue : Número de Vuex (variable global): {{numeroVuex}} </h3>
+    <button @click="aumentar">+++</button>
+    <button @click="disminuir(2)">---</button>
+    <hr>
+   
+    <button @click="obtenerAsociaciones">Obtener Cursos</button>
+   
+    <ul v-for = "item of asociaciones">
+      <li>{{item.name}}</li>
+    </ul>
+ <!--  -->
+    <hr>
+  <!-- -->
     <button class="btn p-3 btn-danger" @click="destruir">Destruir VUE</button>
     <div :class="['p-3', fondo]">
       <p> Escribe [bg-success, bg-info, bg-warning, bg-danger] para cambiar de color</p>
@@ -29,7 +47,7 @@
     <hr>
     <div>
       <!-- Propiedades computadas -->
-      {{ fulName }}
+      {{ fullName }}
     </div>
     <div class='test'>
       <!-- Propiedades del componente                       -->
@@ -43,6 +61,7 @@
 </template>
 
 <script>
+  import Vuex from 'vuex';
   export default {
     // Objetos que tendremos en esta plantilla.
     data(){
@@ -60,41 +79,34 @@
     created() {
       console.log("Create Test.");
     },
-    mounted() {
-    // Se lanza cuando se caga el DOM del HTML
+    mounted() { // Se lanza cuando se caga el DOM del HTML
       this.$emit('msgHijo', this.user.firstName + ' ' + this.user.lastName);
     },
     beforeUpdate: () => console.log("beforeUpdate... "),
     updated: () => console.log('¡¡¡ Updated !!!'),
-    destroyed: () => console.log('KABOOOOM, esto se ha destruido.'),
-    methods: {
-      saludar(name) {
-        alert('Ke tal ' + name);
-      },
-      typing(event){
-        console.log(event.target.value)
-      },
-      typingEnter(event){
-        console.log(event.target.value)
-      },
-      destruir() {
-        this.$destroy()
-      }
-    },
+    destroyed: () => console.log('KABOOOOM, distroyed.'),
     computed: {
-      fulName(){
-        return this.user.firstName + ' ' + this.user.lastName;
-      },
-      anchoBarra(){
-        return this.contador + '%';
-      },
-      color(){
-        return{
+      //  STORE
+      ...Vuex.mapState(['numeroVuex','asociaciones']),
+      //
+      fullName(){return this.user.firstName + ' ' + this.user.lastName;},
+      anchoBarra(){return this.contador + '%';},
+      color(){return{
           'bg-success' : this.contador <= 10,
           'bg-warning' : this.contador > 10 && this.contador <= 20,
           'bg-danger'  : this.contador >= 20
         }
       }
+    },
+    methods: {
+      //  STORE
+      ...Vuex.mapMutations(['aumentar','disminuir']),
+      ...Vuex.mapActions(['obtenerAsociaciones']),
+      //
+      saludar(name) {alert('Ke tal ' + name);},
+      typing(event){console.log(event.target.value)},
+      typingEnter(event){console.log(event.target.value)},
+      destruir() {this.$destroy()}
     },
     props: {
       msgPadre: {

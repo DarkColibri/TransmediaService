@@ -10,23 +10,29 @@
         <li><router-link to="/tasks">Tareas</router-link></li>
         <li><router-link to="/users">Usuarios</router-link></li>
         <li><router-link to="/associations">Asociaciones</router-link></li>
-        <!-- <li> Fondo: {{this.fondo}}</li> -->
-        
       </ul>
     </nav>
     <hr>
-    <h1>Este del Hijo {{mensajeHijo}}</h1>
+    <h3>Mensaje del Hijo {{mensajeHijo}}</h3>
+    <hr>
+    <!-- Store -->
+    <h3>APP.vue : Número de Vuex (variable global) : {{$store.state.numeroVuex}} </h3>
+    <button @click="$store.commit('aumentar')">+</button>
+    <h3>APP.vue : Número de Vuex (variable global): {{numeroVuex}} </h3>
+    <button @click="aumentar">+++</button>
     <hr>
     <!-- msgPadre : Envía mensaje al Hijo -->
     <!-- msgHijo  : Recibe mensaje del Hijo -->
     <router-view :msgPadre="msg" @msgHijo="mensajeHijo = $event"></router-view>
     <hr>
-    <h1>Este del Hijo 2 {{mensajeHijo}}</h1>
-    <hr>
   </div>
 </template>
 
 <script>
+  // import { mapState } from 'vuex';
+  // import Vue from 'vue';
+  import Vuex from 'vuex';
+
   // Componentes
   import Test from  './components/Test.vue';
   import Task from  './components/Tasks.vue';
@@ -46,6 +52,12 @@
       Task,
       User,
       Associations,
+    }
+    ,computed: {
+      ...Vuex.mapState(['numeroVuex'])
+    }
+    ,methods: {
+      ...Vuex.mapMutations(['aumentar'])
     }
   }
 </script>
