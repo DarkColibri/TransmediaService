@@ -1,6 +1,7 @@
 <template lang="html">
-  <div class="container mt-5"> 
-    <h1>User Component. </h1>
+  <div class="container mt-5 "> 
+    <h1> USUARIOS </h1>
+    <hr>
     <h2> Mensaje del padre App.vue: {{ msgPadre }}</h2>
     <ul>
       <li v-for="user in users">
@@ -19,6 +20,7 @@
 <script>
   const axios = require("axios");
   export default {
+    name: 'Users',
     data() {
       return {
         users: [],

@@ -25,7 +25,7 @@ router.get('/', async (req, res) => {
 });
 
 //  --------------------------------------------------
-//  GET http://localhost:8080/tasks/2
+//  GET http://localhost:8080/api/tasks/2
 router.get('/:id', (req, res) => {
   db.tasks
   .findByPk(req.params.id)

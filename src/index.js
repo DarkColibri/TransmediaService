@@ -6,14 +6,13 @@ const morgan = require('morgan');
 const moment = require('moment');
 const listEndpoints = require('express-list-endpoints');
 
+const history = require('connect-history-api-fallback');
+
 // BASE DE DATOS
 const db = require("./models");
 // APIs 
-debug('CARGAMOS TASKS');
 const apiTasks = require('./api/tasks');
-debug('CARGAMOS ASSOCIATIONS');
 const apiAssociations = require('./api/associations');
-debug('TODO CARGADO');
 const bodyParser = require("body-parser");
 
 const app = express();
@@ -29,27 +28,23 @@ console.log(`Configuration [${pjson.version}][${moment().format('MMMM Do YYYY, h
 // Settings
 
 // Port
-debug('ASIGNAMOS PUERTO');
 const port = 8080
 app.set('port', process.env.PORT || port);
 
 //Middlewere 
-debug('CARGAMOS MIDDLEWERE');
 app.use(bodyParser.json());
 app.use(morgan('dev'));
 app.use(express.json());
 
-debug('CARGAMOS RUTAS');
 // Routes
 app.use('/api/tasks', apiTasks);
 app.use('/api/associations', apiAssociations);
+app.use(history());
 
-console.log(listEndpoints(app));
-
-debug('CARGAMOS VUE (/public)');
 // Static files
 app.use(express.static(__dirname + '/public'));
 
+console.log(listEndpoints(app));
 // -----------------------------------------------------------------------------------------------------
 console.log("if Sync Force true - Database will be reset")
 db.sequelize.sync({

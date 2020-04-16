@@ -10,9 +10,9 @@
     <button @click="disminuir(2)">---</button>
     <hr>
    
-    <button @click="obtenerAsociaciones">Obtener Cursos</button>
+    <button @click="getAllAssociations">Obtener Asos</button>
    
-    <ul v-for = "item of asociaciones">
+    <ul v-for = "item of associations">
       <li>{{item.name}}</li>
     </ul>
  <!--  -->
@@ -63,6 +63,7 @@
 <script>
   import Vuex from 'vuex';
   export default {
+    name: 'Test',
     // Objetos que tendremos en esta plantilla.
     data(){
       return{
@@ -77,7 +78,9 @@
       }
     },
     created() {
-      console.log("Create Test.");
+      console.log("CREATE TEST- CARGAMOS ASOCIACIONES");
+      this.getAllAssociations();
+      console.log("FIN DE CARGA")
     },
     mounted() { // Se lanza cuando se caga el DOM del HTML
       this.$emit('msgHijo', this.user.firstName + ' ' + this.user.lastName);
@@ -87,7 +90,7 @@
     destroyed: () => console.log('KABOOOOM, distroyed.'),
     computed: {
       //  STORE
-      ...Vuex.mapState(['numeroVuex','asociaciones']),
+      ...Vuex.mapState(['numeroVuex','associations']),
       //
       fullName(){return this.user.firstName + ' ' + this.user.lastName;},
       anchoBarra(){return this.contador + '%';},
@@ -101,7 +104,7 @@
     methods: {
       //  STORE
       ...Vuex.mapMutations(['aumentar','disminuir']),
-      ...Vuex.mapActions(['obtenerAsociaciones']),
+      ...Vuex.mapActions(['getAllAssociations']),
       //
       saludar(name) {alert('Ke tal ' + name);},
       typing(event){console.log(event.target.value)},

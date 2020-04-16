@@ -11,7 +11,7 @@ const db = require('../models');
 router.get('/', async (req, res) => {
   // debug(req);
   const result = await db.associations.findAll();
-  console.log(JSON.stringify( result));
+  console.log('<<<<< '+JSON.stringify( result));
   res.json(result);
   // axios.get('http://localhost:8081/associations')
   // .then(result => {

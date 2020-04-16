@@ -1,12 +1,9 @@
 <!-- Este es el punto donde pide los datos al servidor -->
 <template>
   <div>
-    <!-- Cabecera de Navegación -->
-    <nav class="navabar navbar-ligth bg-ligth">
-      <a href="/" class="navbar-brand">Proyecto WEB</a>
-    </nav>
-
   	<div class="container">
+      <h1> ASOCIACIONES </h1>
+      <hr>
 			<!-- 1º Fila -->
 			<div class="row pt-5">
 				<!-- 1ª Columna --> 
@@ -49,7 +46,7 @@
 						<tbody>
 							<tr v-for = "association of associations">
 								<td>{{association.name}}</td>
-								<td>{{association.link}}</td>
+								<td> <a :href="association.link" target="_blank"> {{association.link}} </a></td>
                 <td>{{association.description}}</td>
 								<td>
 									<button @click="deleteAssociation(association.id)" class="btn btn-danger">Delete</button>
@@ -65,14 +62,17 @@
 </template>
 
 <script>
+
 	class Association {
 		constructor(name = '', link = '', description = '') {
       this.name = name;
       this.link = link;
 			this.description = description;
 		}
-	}
+  }
+
   export default {
+    name: 'Associations', 
     data() {
       return {
         association: new Association(),
@@ -83,9 +83,6 @@
     },
     created() {
       this.getAssociations();
-    },
-    components: {
-      ...Vuex.mapState([])
     },
     methods: {
       // Botón del Formulario
