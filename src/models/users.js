@@ -1,34 +1,26 @@
-const debug = require('debug')('web:models:users')
-const moment = require("moment");
-
+'use strict';
 module.exports = (sequelize, DataTypes) => {
-  debug(moment().format('MMMM Do YYYY, h:mm:ss a'));
-  const Users = sequelize.define('users', {
-    id: {
-      type: DataTypes.INTEGER,
-      primaryKey: true,
-      autoIncrement: true
-    },
-    name: {
-      type: DataTypes.STRING,
-      defaultValue: "",
-      allowNull: false
-    },
-    email: {
-      type: DataTypes.STRING,
-      defaultValue: "",
-      allowNull: false
-    },
-    pasword: {
-      type: DataTypes.STRING,
-      defaultValue: "",
-      allowNull: false
-    }
-  }
-  // ,{
-  //   freezeTableName: false,
-  // }
-  );
-
-  return Users;
-}
+  const users = sequelize.define('users', {
+    name: DataTypes.STRING,
+    password: DataTypes.STRING,
+    age: DataTypes.STRING,
+    email: DataTypes.STRING,
+    roleId: DataTypes.INTEGER
+  }, {});
+  users.associate = function(models) {
+    // associations can be defined here
+    // El USUARIO TIENE un ROL.
+    users.belongsTo(models.roles);
+    // El USUARIO PUEDE TENER MUCHOS THREADS
+    users.hasMany(models.threads, {
+      foreignKey: 'userId',
+      as: 'threads'
+    });
+    // El USUARIO PUEDE TENER MUCHOS POSTS
+    users.hasMany(models.posts, {
+      foreignKey: 'userId',
+      as: 'posts'
+    })
+  };
+  return users;
+};

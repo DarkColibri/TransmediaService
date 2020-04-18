@@ -1,31 +1,16 @@
-const debug = require("debug")("web:models:association");
-const moment = require('moment')
-
+'use strict';
 module.exports = (sequelize, DataTypes) => {
-  debug(moment().format('MMMM Do YYYY, h:mm:ss a'));
-  const Associations = sequelize.define('associations', {
-    id: {
-      type: DataTypes.INTEGER,
-      primaryKey: true,
-      autoIncrement: true
-    },
-    name: {
-      type: DataTypes.STRING,
-      allowNull: false
-    },
-    description: {
-      type: DataTypes.STRING,
-      allowNull: false
-    },
-    link: {
-      type: DataTypes.STRING,
-      allowNull: false
-    }
-  }
-  // , {
-  //   freezeTableName: false,
-  // }
-  );
-
-  return Associations;
-}
+  const associations = sequelize.define('associations', {
+    name: DataTypes.STRING,
+    description: DataTypes.STRING,
+    link: DataTypes.STRING
+  }, {});
+  associations.associate = function(models) {
+    associations.belongsToMany(models.categories,{
+      through: 'associationCategories',
+      as: 'categories',
+      foreignKey: 'associationId'
+    })
+  };
+  return associations;
+};

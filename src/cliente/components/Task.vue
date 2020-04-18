@@ -1,4 +1,3 @@
-<!-- Este es el punto donde pide los datos al servidor -->
 <template>
   <div>
     <div class="container">
@@ -29,10 +28,7 @@
 import Vuex from 'vuex';
 export default {
 	name: 'Task',
-	// Datos de la máquina
-  // methods: {
-  //   ...Vuex.mapActions(['getAllTasks', 'getTask', 'postTask', 'putTask' , 'deleteTask']),
-  // },
+
   computed: {
     //  STORE
     ...Vuex.mapState(['task'])

@@ -9,7 +9,9 @@ const listEndpoints = require('express-list-endpoints');
 const history = require('connect-history-api-fallback');
 
 // BASE DE DATOS
+debug('CARGA MODELOS');
 const db = require("./models");
+debug('**********   MODELOS CARGADOS *********');
 // APIs 
 const apiTasks = require('./api/tasks');
 const apiAssociations = require('./api/associations');
