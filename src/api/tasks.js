@@ -4,7 +4,7 @@ const express = require('express');
 const router = express.Router();
 const moment = require("moment");
 const axios = require("axios");
-const db = require('../models');
+const db = require('../db/models');
 
 //  --------------------------------------------------
 //  GET http://localhost:8080/api/tasks/
