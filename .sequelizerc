@@ -2,9 +2,7 @@ const path = require('path');
 
 module.exports = {
     "config": path.resolve('./src/db/config', 'config.json'),
-    // Modelo
     "models-path":  path.resolve('./src/db/models'),
     "seeders-path":  path.resolve('./src/db/seeders'),
-    // Las versiones de la BD
     "migrations-path":  path.resolve('./src/db/migrations'),
 };

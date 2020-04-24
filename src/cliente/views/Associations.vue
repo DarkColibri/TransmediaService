@@ -140,8 +140,8 @@
             'Content-type': 'application/json'
           }
         })
-        .then(res => res.json())
-        .then(data => {
+        // .then(res => res.json())
+        .then(res => {
           this.getAssociations();
         })
       },

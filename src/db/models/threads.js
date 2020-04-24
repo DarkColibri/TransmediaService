@@ -1,7 +1,6 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
   const threads = sequelize.define('threads', {
-    name: DataTypes.STRING,
     description: DataTypes.STRING,
     subject: DataTypes.STRING,
     categoryId: DataTypes.INTEGER,

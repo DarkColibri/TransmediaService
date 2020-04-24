@@ -26,7 +26,6 @@ export default new Vuex.Store({
     task: new Task(),
     // taskToEdit: 0,
     // isEditTask: false,
-    // 
     numeroVuex: 10
   },
   mutations:{

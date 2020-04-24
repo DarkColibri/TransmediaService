@@ -13,12 +13,14 @@ sequelize model:create --name ssociationCategories --attributes categoryId:integ
 belongsToMany() el muchos a muchos, (n..n)
 belongsTo() le pertenece un. (0..1)
 
-HACER CAMBIOS EN LA BASE DE DATOS:
+## HACER CAMBIOS EN LA BASE DE DATOS:
 sequelize db:migrate
 
-DESHACE CAMBIOS EN LA BASE DE DATOS
+sequelize db:seed:all
+
+
+## DESHACE CAMBIOS EN LA BASE DE DATOS
 sequelize db:migrate:undo
 
-sequelize db:seed:all
 
 
