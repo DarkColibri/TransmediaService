@@ -6,7 +6,14 @@ class PostRepository extends BaseRepository {
     super(db, 'posts');
   }
   // Meteremos los métodos que no son crud
-  
+  getThreadsPosts(thread) {
+    console.log('[REPOSITORY ]:' + thread);
+    return this._db[this.entity].findAll({
+      where: {
+        threadId: thread
+      }
+    });
+  }
 }
 
 module.exports = PostRepository

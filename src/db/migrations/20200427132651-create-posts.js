@@ -9,28 +9,13 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       content: {
-        allowNull: false,
         type: Sequelize.STRING
       },
       threadId: {
-        allowNull: false,
-        type: Sequelize.INTEGER,
-        onDelete: 'CASCADE',
-        onUpdate: 'CASCADE',
-        references: {
-          model: 'threads',
-          key: 'id'
-        }
+        type: Sequelize.INTEGER
       },
       userId: {
-        allowNull: false,
-        type: Sequelize.INTEGER,
-        onDelete: 'CASCADE',
-        onUpdate: 'CASCADE',
-        references: {
-          model: 'users',
-          key: 'id'
-        }
+        type: Sequelize.INTEGER
       },
       votesUp: {
         type: Sequelize.INTEGER
@@ -39,14 +24,7 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       postRefId: {
-        type: Sequelize.INTEGER,
-        allowNull: true,
-        onDelete: 'CASCADE',
-        onUpdate: 'CASCADE',
-        references: {
-          model: 'posts',
-          key: 'id'
-        }
+        type: Sequelize.INTEGER
       },
       createdAt: {
         allowNull: false,

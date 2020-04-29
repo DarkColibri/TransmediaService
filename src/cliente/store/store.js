@@ -3,14 +3,6 @@ import Vuex from 'vuex';
 
 Vue.use(Vuex);
 
-// Class
-// class Association {
-//   constructor(name = '', link = '', description = '') {
-//     this.name = name;
-//     this.link = link;
-//     this.description = description;
-//   }
-// }
 class Task {
   constructor(id = 0 ,title = '', description = '') {
     this.id = id;
