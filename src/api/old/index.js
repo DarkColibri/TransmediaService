@@ -11,6 +11,7 @@ const cors = require("cors"); // <<<<<< ¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?¿?�
 const compression = require("compression");
 
 module.exports = function({ AssociationRouter, AssociationCategoryRouter, CategoryRouter, ThreadRouter,  PostRouter, RoleRouter, UserRouter }) {
+// module.exports = function({ ThreadRouter }) {
   const router = Router();
   const apiRoute = Router();
 

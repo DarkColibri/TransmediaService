@@ -34,9 +34,13 @@ class BaseBusiness {
     if(!updatedEntity) return null;
     return updatedEntity;
   }
-
+  
   async delete(id) {
-    return await this._entityRepository.delete(id);
+    const { id } = req.params;
+      const deleted = await this._db[this.entity].destroy({ where: { id }})
+      if (!deleted) return null;
+      return deleted
+    }
   }
 }
 

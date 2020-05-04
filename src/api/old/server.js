@@ -23,8 +23,14 @@ class Server {
 
     // Load EXPRESS
     this._express = express();
-
     this._express.use(morgan('dev'));
+    // Global variables
+    this._express.use((req, res, next) => {
+      // app.locals.message = req.flash('message');
+      // app.locals.success = req.flash('success');
+      // app.locals.user = req.user;
+      next();
+    });
     // Load ROUTER
     this._express.use(router);
     this._express.use(history());
